@@ -4,6 +4,7 @@ class Coal < Formula
   url "https://github.com/coal-library/coal/releases/download/v3.0.4/coal-3.0.4.tar.gz"
   sha256 "0a9091aa281f51b9513f11aae39758a6188bca63010524f36b3bdc566381ca4a"
   license "BSD-2-Clause"
+  revision 1
   compatibility_version 2
   head "https://github.com/coal-library/coal.git", branch: "devel"
 
