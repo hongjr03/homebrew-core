@@ -1,10 +1,10 @@
 class DartSdk < Formula
   desc "Dart Language SDK, including the VM, dart2js, core libraries, and more"
   homepage "https://dart.dev"
-  url "https://github.com/dart-lang/sdk/archive/refs/tags/3.12.2.tar.gz"
-  sha256 "e84861c0a725990b6efbec1ec3be7cbf38352983871f8e74c3d42bc259a0a0d8"
+  url "https://github.com/dart-lang/sdk/archive/refs/tags/3.13.0.tar.gz"
+  sha256 "89a06c61c4fd29dccae6ba48e86141dc94b867cb1c0ec021175dddc0720a0747"
   license "BSD-3-Clause"
-  compatibility_version 2
+  compatibility_version 3
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d98d388dfe2b2af3b1888fa5fd4ec4f722b4e8fc09dd6fb5df45fc5e338f7795"
@@ -25,20 +25,13 @@ class DartSdk < Formula
   # always pull the latest commit from https://chromium.googlesource.com/chromium/tools/depot_tools.git/+/refs/heads/main
   resource "depot-tools" do
     url "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
-        revision: "b9d2b54daea64fa757df5ba737e611b691dc6201"
-    version "b9d2b54daea64fa757df5ba737e611b691dc6201"
+        revision: "a1bda5b6167435ad0666191f0353f242104f5845"
+    version "a1bda5b6167435ad0666191f0353f242104f5845"
 
     livecheck do
       url "https://chromium.googlesource.com/chromium/tools/depot_tools.git/+/refs/heads/main?format=JSON"
       regex(/"commit":\s*"(\h+)"/i)
     end
-  end
-
-  patch do
-    url "https://github.com/dart-lang/sdk/commit/c53bdf2dab079903a56e7e3a8d352319985c6d89.patch?full_index=1"
-    sha256 "4b91454a8c9f301725cde78c1deb514996673853e63b9e68d013bcd7a261ac11"
-    type :backport
-    resolves "https://github.com/dart-lang/sdk/issues/63115"
   end
 
   def install
