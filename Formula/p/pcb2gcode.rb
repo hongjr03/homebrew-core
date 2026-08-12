@@ -4,6 +4,7 @@ class Pcb2gcode < Formula
   url "https://github.com/pcb2gcode/pcb2gcode/archive/refs/tags/v3.0.4.tar.gz"
   sha256 "46351d4b7479059becae064cc68f2d1d68d42ae314ff7a1d9a240c71a3c0c98c"
   license "GPL-3.0-or-later"
+  revision 1
   head "https://github.com/pcb2gcode/pcb2gcode.git", branch: "master"
 
   livecheck do
