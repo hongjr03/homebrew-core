@@ -7,7 +7,7 @@ class Pachi < Formula
     "GPL-2.0-only",
     "BSD-2-Clause", # `caffe`
   ]
-  revision 2
+  revision 3
   head "https://github.com/pasky/pachi.git", branch: "master"
 
   bottle do
