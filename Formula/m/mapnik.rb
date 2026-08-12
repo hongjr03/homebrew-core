@@ -4,6 +4,7 @@ class Mapnik < Formula
   url "https://github.com/mapnik/mapnik/releases/download/v4.3.0/mapnik-v4.3.0.tar.bz2"
   sha256 "cec8c2bf2fd5f46be0fdb77469761a3ba1d51bea7b3c16b91875e9f89867d141"
   license "LGPL-2.1-or-later"
+  revision 1
   head "https://github.com/mapnik/mapnik.git", branch: "master"
 
   livecheck do
