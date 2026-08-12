@@ -4,6 +4,7 @@ class DartSass < Formula
   url "https://github.com/sass/dart-sass/archive/refs/tags/1.102.0.tar.gz"
   sha256 "7867797ec39c436462407eb3dc83555a7b8d157009838054bdbcd675f9857f14"
   license "MIT"
+  revision 1
 
   # Some tags are used for sass-api/sass-parser
   livecheck do
