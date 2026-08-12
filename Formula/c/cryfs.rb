@@ -6,7 +6,7 @@ class Cryfs < Formula
   url "https://github.com/cryfs/cryfs/releases/download/1.0.3/cryfs-1.0.3.tar.gz"
   sha256 "5550f612f7b692e60c0c10a0331dcefbcc9616ad1411a016de7e4503ad866696"
   license "LGPL-3.0-or-later"
-  revision 1
+  revision 2
   head "https://github.com/cryfs/cryfs.git", branch: "main"
 
   bottle do
