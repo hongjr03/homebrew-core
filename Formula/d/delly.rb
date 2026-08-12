@@ -4,6 +4,7 @@ class Delly < Formula
   url "https://github.com/dellytools/delly/archive/refs/tags/v2.5.1.tar.gz"
   sha256 "84abfb79bfbb8489758b76cab6908e6d5de586752892a07dd7d1c887027962cf"
   license "BSD-3-Clause"
+  revision 1
   head "https://github.com/dellytools/delly.git", branch: "main"
 
   bottle do
