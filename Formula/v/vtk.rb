@@ -4,6 +4,7 @@ class Vtk < Formula
   url "https://www.vtk.org/files/release/9.6/VTK-9.6.2.tar.gz"
   sha256 "aed12cec12a9609179bf66329070266627ca64244a10856a452b2a17ffb04a1d"
   license "BSD-3-Clause"
+  revision 1
   compatibility_version 3
   head "https://gitlab.kitware.com/vtk/vtk.git", branch: "master"
 
