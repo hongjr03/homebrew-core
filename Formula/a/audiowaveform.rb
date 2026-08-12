@@ -4,6 +4,7 @@ class Audiowaveform < Formula
   url "https://codeberg.org/chrisn/audiowaveform/archive/1.11.1.tar.gz"
   sha256 "cf827d835efe4edb48c16f48be7a9502d7572c9d6f92f811af5238d64b36bda2"
   license "GPL-3.0-only"
+  revision 1
 
   bottle do
     rebuild 1
