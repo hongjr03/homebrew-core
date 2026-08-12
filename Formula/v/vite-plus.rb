@@ -1,8 +1,8 @@
 class VitePlus < Formula
   desc "Unified toolchain and entry point for web development"
   homepage "https://viteplus.dev"
-  url "https://github.com/voidzero-dev/vite-plus/archive/refs/tags/v0.2.8.tar.gz"
-  sha256 "c07ae8f828039fae32b791abcfc8f1d1b769024a2ae5c04bdc2946e8318615f4"
+  url "https://github.com/voidzero-dev/vite-plus/archive/refs/tags/v0.2.9.tar.gz"
+  sha256 "749f6bd91c31a0f1ddb5221c03058ea52a582becbf1d05aeb5a1cd3ad19b9559"
   license "MIT"
   head "https://github.com/voidzero-dev/vite-plus.git", branch: "main"
 
@@ -23,8 +23,8 @@ class VitePlus < Formula
 
   resource "rolldown" do
     url "https://github.com/rolldown/rolldown.git",
-        revision: "872b98ac7476eb7d5892a2913e4ba010d124c6ac"
-    version "872b98ac7476eb7d5892a2913e4ba010d124c6ac"
+        revision: "52dbd194ea6b6d4320706caa5f2db14b1034adaf"
+    version "52dbd194ea6b6d4320706caa5f2db14b1034adaf"
 
     livecheck do
       url "https://raw.githubusercontent.com/voidzero-dev/vite-plus/refs/tags/v#{LATEST_VERSION}/packages/tools/.upstream-versions.json"
@@ -36,8 +36,8 @@ class VitePlus < Formula
 
   resource "vite" do
     url "https://github.com/vitejs/vite.git",
-        revision: "fa79f9ab699f9a22a6f9b50f3d247be6b51f684d"
-    version "fa79f9ab699f9a22a6f9b50f3d247be6b51f684d"
+        revision: "421615865dad3ed39137d17281814fc78a41246c"
+    version "421615865dad3ed39137d17281814fc78a41246c"
 
     livecheck do
       url "https://raw.githubusercontent.com/voidzero-dev/vite-plus/refs/tags/v#{LATEST_VERSION}/packages/tools/.upstream-versions.json"
@@ -51,10 +51,12 @@ class VitePlus < Formula
     resource("rolldown").stage buildpath/"rolldown"
     resource("vite").stage buildpath/"vite"
 
-    ENV["NPM_CONFIG_MANAGE_PACKAGE_MANAGER_VERSIONS"] = "false"
+    # Match the pinned `packageManager` to brewed pnpm
+    inreplace "package.json", /"packageManager": "pnpm@[^"]+"/,
+              "\"packageManager\": \"pnpm@#{Formula["pnpm"].version}\""
 
     system "just", "build"
-    system "cargo", "install", *std_cargo_args(path: "crates/vite_global_cli")
+    system "cargo", "install", *std_cargo_args(path: "crates/vp_global_cli")
 
     system "pnpm", "--filter=vite-plus", "deploy", "--prod", "--legacy", "--no-optional",
            prefix/"node_modules/vite-plus"
