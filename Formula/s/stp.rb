@@ -4,6 +4,7 @@ class Stp < Formula
   url "https://github.com/stp/stp/archive/refs/tags/2.4.1.tar.gz"
   sha256 "6f8bca3612e3d61868450dbf7771897b2a909f446e8de460bdf31f13a6cd0318"
   license "MIT"
+  revision 1
   compatibility_version 1
   head "https://github.com/stp/stp.git", branch: "master"
 
