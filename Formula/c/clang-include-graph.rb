@@ -4,7 +4,7 @@ class ClangIncludeGraph < Formula
   url "https://github.com/bkryza/clang-include-graph/archive/refs/tags/0.2.0.tar.gz"
   sha256 "174bbf961a2426030102bcf444eb2ca4ac10c05cfd5b993fef24bf4d492c420c"
   license "Apache-2.0"
-  revision 2
+  revision 3
   head "https://github.com/bkryza/clang-include-graph.git", branch: "main"
 
   bottle do
