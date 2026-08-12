@@ -4,6 +4,7 @@ class Papilo < Formula
   url "https://github.com/scipopt/papilo/archive/refs/tags/v3.0.1.tar.gz"
   sha256 "b7c70e754c23f8bef5843ac02b82f9dc1707a653c867474123e635951305af88"
   license "Apache-2.0"
+  revision 1
   version_scheme 1
 
   bottle do
