@@ -1,8 +1,8 @@
 class Qemu < Formula
   desc "Generic machine emulator and virtualizer"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-11.0.3.tar.xz"
-  sha256 "da5fcffc32762820568b828ed430a728864d34d50b6d2f30358597760cbb0523"
+  url "https://download.qemu.org/qemu-11.1.0.tar.xz"
+  sha256 "6ee1d1a61f68212476b27108c26da5f449dc09b626d42f8279ba0dc2e08fa858"
   license "GPL-2.0-only"
   compatibility_version 1
   head "https://gitlab.com/qemu-project/qemu.git", branch: "master"
@@ -21,6 +21,7 @@ class Qemu < Formula
     sha256 x86_64_linux:  "d4066d891b708a60cdf91a853dc67b9bc7162efd1db74a6099f20db71bfb5621"
   end
 
+  depends_on "bison" => :build # >= 3.0
   depends_on "libtool" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build
@@ -45,7 +46,6 @@ class Qemu < Formula
   depends_on "vde"
   depends_on "zstd"
 
-  uses_from_macos "bison" => :build
   uses_from_macos "flex" => :build
   uses_from_macos "bzip2"
 
@@ -64,6 +64,9 @@ class Qemu < Formula
     depends_on "systemd"
     depends_on "zlib-ng-compat"
   end
+
+  # Stub EL2 sysregs absent from the macOS 14 SDK
+  patch :DATA
 
   def install
     ENV["LIBTOOL"] = "glibtool"
@@ -133,3 +136,60 @@ class Qemu < Formula
     end
   end
 end
+
+__END__
+--- a/target/arm/hvf_arm.h
++++ b/target/arm/hvf_arm.h
+@@ -68,4 +68,10 @@
+   #include "hvf/hvf_sme_stubs.h"
+ #endif /* ifdef __MAC_OS_X_VERSION_MAX_ALLOWED */
+ 
++/* The EL2 sysregs and nested virt config calls need macOS SDK >= 15.0. */
++#if defined(__aarch64__) && defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && \
++    (__MAC_OS_X_VERSION_MAX_ALLOWED < 150000)
++  #include "hvf/hvf_el2_stubs.h"
+ #endif
++
++#endif
+--- /dev/null
++++ b/target/arm/hvf/hvf_el2_stubs.h
+@@ -0,0 +1,39 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++/* Ids as asserted in sysreg.c.inc; MDCR_EL2 is omitted because hvf.c defines it. */
++
++enum {
++    HV_SYS_REG_CNTHCTL_EL2 = 0xe708,
++    HV_SYS_REG_CNTHP_TVAL_EL2 = 0xe710,
++    HV_SYS_REG_CNTVOFF_EL2 = 0xe703,
++    HV_SYS_REG_CPTR_EL2 = 0xe08a,
++    HV_SYS_REG_ELR_EL2 = 0xe201,
++    HV_SYS_REG_ESR_EL2 = 0xe290,
++    HV_SYS_REG_FAR_EL2 = 0xe300,
++    HV_SYS_REG_HCR_EL2 = 0xe088,
++    HV_SYS_REG_HPFAR_EL2 = 0xe304,
++    HV_SYS_REG_MAIR_EL2 = 0xe510,
++    HV_SYS_REG_SCTLR_EL2 = 0xe080,
++    HV_SYS_REG_SPSR_EL2 = 0xe200,
++    HV_SYS_REG_SP_EL2 = 0xf208,
++    HV_SYS_REG_TCR_EL2 = 0xe102,
++    HV_SYS_REG_TPIDR_EL2 = 0xe682,
++    HV_SYS_REG_TTBR0_EL2 = 0xe100,
++    HV_SYS_REG_TTBR1_EL2 = 0xe101,
++    HV_SYS_REG_VBAR_EL2 = 0xe600,
++    HV_SYS_REG_VMPIDR_EL2 = 0xe005,
++    HV_SYS_REG_VPIDR_EL2 = 0xe000,
++    HV_SYS_REG_VTCR_EL2 = 0xe10a,
++    HV_SYS_REG_VTTBR_EL2 = 0xe108,
++};
++
++static inline hv_return_t hv_vm_config_get_el2_supported(bool *el2_supported)
++{
++    g_assert_not_reached();
++}
++
++static inline hv_return_t hv_vm_config_set_el2_enabled(hv_vm_config_t config,
++                                                       bool el2_enabled)
++{
++    g_assert_not_reached();
++}
