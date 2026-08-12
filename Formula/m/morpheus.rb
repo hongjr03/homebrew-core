@@ -4,6 +4,7 @@ class Morpheus < Formula
   url "https://gitlab.com/morpheus.lab/morpheus/-/archive/v2.4.1/morpheus-v2.4.1.tar.gz"
   sha256 "27da3928bfbc58c592d598a0c91b81990b97f0e37c00d1b8071fc208d91875fc"
   license "BSD-3-Clause"
+  revision 1
 
   livecheck do
     url :stable
