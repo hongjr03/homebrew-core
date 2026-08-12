@@ -7,6 +7,7 @@ class Redex < Formula
   url "https://github.com/facebook/redex/archive/refs/tags/v2026.04.30.tar.gz"
   sha256 "60c638403ce608b7d96d76592f4e2bfcb5e541b2eee33f97d06f771f2c147880"
   license "MIT"
+  revision 1
   head "https://github.com/facebook/redex.git", branch: "main"
 
   bottle do
