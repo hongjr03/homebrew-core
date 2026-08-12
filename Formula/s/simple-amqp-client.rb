@@ -2,7 +2,7 @@ class SimpleAmqpClient < Formula
   desc "C++ interface to rabbitmq-c"
   homepage "https://github.com/alanxz/SimpleAmqpClient"
   license "MIT"
-  revision 13
+  revision 14
   head "https://github.com/alanxz/SimpleAmqpClient.git", branch: "master"
 
   stable do
